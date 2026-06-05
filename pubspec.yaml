@@ -9,6 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  internet_connection_checker_plus: ^3.0.1
 
 dev_dependencies:
   flutter_test:
