@@ -1,6 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'dart:convert';
-
 import 'package:user_log/feature/home/model/geo.dart';
 
 part 'address.g.dart';
