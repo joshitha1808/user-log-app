@@ -1,6 +1,6 @@
-import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:http/http.dart' as http;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -31,14 +31,14 @@ class UserLogRemoteRepository {
     required this.connectionChecker,
   });
 
-  Future<Either<Failure, List<Users>>> getUsers() async { 
+  Future<Either<Failure, List<Users>>> getUsers() async {
     try {
       final isConnected = await connectionChecker.isConnected;
       if (!isConnected) {
         return const Left(Failure('No internet connection.'));
       }
       final uri = Uri.parse("${ServerConstants.baseApiUrl}users");
-      final response = await client.get( 
+      final response = await client.get(
         uri,
         headers: {'Content-Type': 'application/json'},
       );
@@ -47,11 +47,12 @@ class UserLogRemoteRepository {
         return Left(Failure(response.body, response.statusCode));
       }
 
-      final mockData = usersFromJson(jsonDecode(response.body));
+      final mockData = usersFromJson(response.body);
       return Right(mockData);
     } on SocketException {
       return const Left(Failure('No internet connection.'));
     } catch (e) {
+      debugPrint(e.toString());
       return Left(Failure('Failed to fetch data: ${e.toString()}'));
     }
   }
