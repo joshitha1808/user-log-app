@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:user_log/feature/home/view/screen/user_page.dart';
+import 'package:user_log/init_dependencies.dart';
 
 void main() {
+  initDependencies();
   runApp(ProviderScope(child: const MainApp()));
 }
 
